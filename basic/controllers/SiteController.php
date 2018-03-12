@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\EntryForm;
 
 class SiteController extends Controller
 {
@@ -123,4 +124,16 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+
+    public function actionSay()
+    {
+        $model = new EntryForm;
+        if($model->load(Yii::$app->request->post()) && $model->validate()){
+            return $this->render('error', ['name' =>'xxx','message'=>'层高']);
+        }else{
+            return $this->render('say',['message'=>'错误！','name'=>'错误','model'=>$model]);
+        }
+    }
+
 }
